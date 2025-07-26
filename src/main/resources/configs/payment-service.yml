@@ -1,3 +1,5 @@
+server:
+  port: 8060
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5555/payment
@@ -12,7 +14,7 @@ spring:
   kafka:
     producer:
       bootstrap-servers: localhost:9092
-      key-serializer: org.apache.kafka.common.StringSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
         spring.json.type.mapping: paymentConfirmation:kg.manurov.ecommerce.notification.PaymentNotificationRequest
