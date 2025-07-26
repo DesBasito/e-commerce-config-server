@@ -1,5 +1,3 @@
-server:
-  port: 8060
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5555/payment
@@ -18,3 +16,23 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
         spring.json.type.mapping: paymentConfirmation:kg.manurov.ecommerce.notification.PaymentNotificationRequest
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: paymentGroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+
+server:
+  port: 8060
+
+application:
+  config:
+    customer-url: http://localhost:8090/api/v1/customers
+    product-url: http://localhost:8050/api/v1/products
+    payment-url: http://localhost:8060/api/v1/payments
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

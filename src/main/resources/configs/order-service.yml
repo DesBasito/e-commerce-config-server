@@ -16,6 +16,13 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
         spring.json.type.mapping: orderConfirmation:kg.manurov.ecommerce.kafka.OrderConfirmation
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: orderGroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+
 server:
   port: 8070
 
@@ -24,3 +31,8 @@ application:
     customer-url: http://localhost:8222/api/v1/customers
     product-url: http://localhost:8222/api/v1/products
     payment-url: http://localhost:8222/api/v1/payments
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
